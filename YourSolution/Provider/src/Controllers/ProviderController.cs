@@ -32,13 +32,8 @@ namespace Provider.Controllers
                 return NotFound();
             }
 
-            DateTime parsedDateTime;
-
-            try
-            {
-                parsedDateTime = DateTime.Parse(validDateTime);
-            }
-            catch(Exception ex)
+            DateTime parsedDateTime = DateTime.MinValue;
+            if (!DateTime.TryParse(validDateTime, out parsedDateTime))
             {
                 return BadRequest(new { message = "validDateTime is not a date or time" });
             }
